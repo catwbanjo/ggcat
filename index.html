@@ -15,24 +15,42 @@
 
     <body class="flex justify-center items-center w-dvw h-dvh">
         <img src="src/무제13.png" class="object-cover w-full h-full absolute z-[-1]">
-        <div class="grid grid-cols-2 w-5xl h-135 backdrop-blur-xl border-3 border-white/10 overflow-hidden rounded-xl text-white">
-            <div class="border-r-2 border-white/5 text-center relative">
-                <img src="src/무제12.png" class="object-cover object-left h-full w-2/5 z-[-4] mask-r-from-40% brightness-35">
-                <div class="text-left absolute top-0 left-0 p-8 ps-9 pe-10 w-full h-full">
+        <div class="grid grid-rows-none lg:grid-cols-2 lg:grid-rows-1 w-4xl m-5 lg:m-0 lg:w-5xl lg:h-135 h-auto backdrop-blur-xl border-3 border-white/10 overflow-hidden rounded-xl text-white">
+            <div class="border-b-2 lg:border-r-2 lg:border-b-0 border-white/5 text-center relative">
+                <img src="src/무제12.png" class="absolute object-cover object-left h-full w-2/5 z-[-4] mask-r-from-40% brightness-35">
+                <div class="text-left top-0 left-0 p-8 ps-9 pe-10 w-full h-full">
                     <div class="grid grid-cols-2 w-full items-center self-start">
                         <div class="h-auto self-start">
-                        <h1 class="text-white text-4xl">Lumi</h1>
-                        <h3 class="text-gray-500 text-2xl">@solumis</h3>
+                        <h1 class="text-white text-3xl lg:text-4xl">Lumi</h1>
+                        <h3 class="text-gray-500 text-xl lg:text-2xl">@solumis</h3>
                         </div>
-                        <div class="flex h-9 w-full gap-1 mb-4 items-center justify-end">
-                            <img class="h-full" src="brand_logos/patreon_white.png"><img class="h-22/14" src="brand_logos/tiktok_white.png"><img class="h-full" src="brand_logos/x_white.png">
+                        <div class="flex h-7 lg:h-9 w-full lg:gap-1 mb-4 items-center justify-end">
+                            <a href="https://patreon.com/solumis?utm_content=logolink&utm_medium=referral&utm_source=ggcat.link" class="h-full flex items-center">
+                            <img class="h-full" src="brand_logos/patreon_white.png">
+                            </a>
+                            <a href="https://tiktok.com/@solumisce?utm_content=logolink&utm_medium=referral&utm_source=ggcat.link" class="h-full flex items-center">
+                                <img class="h-22/14" src="brand_logos/tiktok_white.png">
+                            </a>
+                            <a href="#" onclick="alert('I don\'t really have a X account yet it\'s to populate the icons')" class="h-full flex items-center">
+                                <img class="h-full" src="brand_logos/x_white.png">
+                            </a>
                         </div>
                     </div><br/>
-                    <span class="text-xl">My timezone: <b>GMT+9</b> or Asia/Seoul (<span id="clock">--:--:--</span>)</span><br/><br/>
+                    <span class="lg:text-lg">Currently <b><span id="discord_online_status">unknown</span></b>, status msg: <q><span id="discord_custom_status">unknown</span></q></span><br/><br/>
+                    <span class="lg:text-lg"><b>My timezone</b>: <b>GMT+9</b> or Asia/Seoul (<span id="clock">--:--:--</span>)</span><br/>
+                    <span class="lg:text-lg"><b>Sex/Gender</b>: Characterized by an <b>XY chromosomal configuration</b> with a corresponding public gender identity categorized inside the L<b>G</b>BTQ+ spectrum. (male and gay)</span><br/>
+                    <span class="lg:text-lg"><b>Likes/Dislikes</b>: Love drawing, and computing. I don't have something I dislike really.</span><br/>
+                    <span class="text-base lg:text-lg"><b>Age</b>: <b><span id="age">--</span></b> (Fourth of July, 2011)</span>
                     
                 </div>
             </div>
-            <div class="m-4 overflow-auto"><span class="text-white">My usernames differ <b>a lot!!</b> Somehow, they're taken by people who was faster than me. Some of my usernames are <b>solumis, solumisce, solumice, and sonolas.</b></span></div>
+            <div class="m-4 overflow-auto">
+                <span class="text-white">Hello, I'm Lumi! I'm available in platforms Discord, TikTok, Patreon, and Roblox! This is an About Me page which links to cool artworks on Patreon!</span>
+                <br/>
+                <span class="text-white">My usernames differ <b>a lot!!</b> Somehow, they're taken by people who was faster than me. Some of my usernames are <b>solumis, solumisce, solumice, and sonolas.</b></span>
+                <br/>
+                <span class="text-white"><b>I'm open to being friends!</b> I want to make new friends that I chat with! You can speak to me on Discord (@solumis), TikTok DMs, and Signal (@solumis.69)! </span>
+            </div>
         </div>
     </body>
 
@@ -44,6 +62,30 @@
             requestAnimationFrame(step);
         }
         requestAnimationFrame(step);
+        const birth = new Date("2011-07-04");
+        const age = d => ((t=new Date()),[t.getFullYear()-d.getFullYear()-(t<new Date(t.getFullYear(),d.getMonth(),d.getDate())),(t.getMonth()-d.getMonth()+12-(t.getDate()<d.getDate()))%12]);
+
+        const [yr,mo] = age(birth);
+
+        const birthdom = document.getElementById("age");
+        birthdom.innerHTML = `${yr} years, ${mo} months`;
+
+        // dc status
+        const discord_online_status = document.getElementById("discord_online_status")
+        const discord_custom_status = document.getElementById("discord_custom_status")
+        fetch("https://api.lanyard.rest/v1/users/1287065525716783137")
+            .then(response => response.json())
+                .then(({ data }) => {
+                    discord_online_status.innerText = data.discord_status
+                    const customActivity = data.activities.find(activity => activity.type === 4);
+                    if (customActivity) {
+                        const emoji = customActivity.emoji ? customActivity.emoji.name+" " : '';
+                        const text = customActivity.state || '';
+                        discord_custom_status.innerText = emoji + text
+                    } else {
+                        discord_custom_status.innerText = "not set"
+                    }
+                });
     </script>
 
 </html>
