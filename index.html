@@ -73,19 +73,19 @@
         // dc status
         const discord_online_status = document.getElementById("discord_online_status")
         const discord_custom_status = document.getElementById("discord_custom_status")
-        // fetch("https://api.lanyard.rest/v1/users/1287065525716783137")
-        //     .then(response => response.json())
-        //         .then(({ data }) => {
-        //             discord_online_status.innerText = data.discord_status
-        //             const customActivity = data.activities.find(activity => activity.type === 4);
-        //             if (customActivity) {
-        //                 const emoji = customActivity.emoji ? customActivity.emoji.name+" " : '';
-        //                 const text = customActivity.state || '';
-        //                 discord_custom_status.innerText = emoji + text
-        //             } else {
-        //                 discord_custom_status.innerText = "not set"
-        //             }
-        //         });
+         fetch("https://api.lanyard.rest/v1/users/1287065525716783137")
+             .then(response => response.json())
+                 .then(({ data }) => {
+                     discord_online_status.innerText = data.discord_status
+                     const customActivity = data.activities.find(activity => activity.type === 4);
+                    if (customActivity) {
+                         const emoji = customActivity.emoji ? customActivity.emoji.name+" " : '';
+                         const text = customActivity.state || '';
+                         discord_custom_status.innerText = emoji + text
+                     } else {
+                         discord_custom_status.innerText = "not set"
+                    }
+                 });
     </script>
 
 </html>
