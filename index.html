@@ -13,9 +13,9 @@
         <link href="./prod/style.css" rel="stylesheet">
     </head>
 
-    <body class="flex justify-center items-center w-dvw h-dvh">
-        <img src="src/무제13.png" class="object-cover w-full h-full absolute z-[-1]">
-        <div class="grid grid-rows-none lg:grid-cols-2 lg:grid-rows-1 w-full h-full lg:w-4xl m-0 lg:m-0 lg:w-5xl lg:h-135 h-auto backdrop-blur-xl border-3 border-white/10 overflow-hidden rounded-xl text-white">
+    <body class="flex justify-center items-center w-dvw min-h-dvh h-auto lg:h-dvh">
+        <img src="src/무제13.png" class="object-cover w-full h-dvh top-0 lg:h-dvh fixed z-[-12]">
+        <div class="grid grid-rows-none lg:grid-cols-2 lg:grid-rows-1 w-full min-h-full lg:min-h-135 lg:w-4xl m-0 lg:m-0 lg:w-5xl lg:h-135 h-auto backdrop-blur-xl border-3 border-white/10 overflow-hidden rounded-xl text-white">
             <div class="border-b-2 lg:border-r-2 lg:border-b-0 border-white/5 text-center relative">
                 <img src="src/무제12.png" class="absolute object-cover object-left h-full w-2/5 z-[-4] mask-r-from-40% brightness-35">
                 <div class="text-left top-0 left-0 p-8 ps-9 pe-10 w-full h-full">
@@ -73,19 +73,19 @@
         // dc status
         const discord_online_status = document.getElementById("discord_online_status")
         const discord_custom_status = document.getElementById("discord_custom_status")
-        fetch("https://api.lanyard.rest/v1/users/1287065525716783137")
-            .then(response => response.json())
-                .then(({ data }) => {
-                    discord_online_status.innerText = data.discord_status
-                    const customActivity = data.activities.find(activity => activity.type === 4);
-                    if (customActivity) {
-                        const emoji = customActivity.emoji ? customActivity.emoji.name+" " : '';
-                        const text = customActivity.state || '';
-                        discord_custom_status.innerText = emoji + text
-                    } else {
-                        discord_custom_status.innerText = "not set"
-                    }
-                });
+        // fetch("https://api.lanyard.rest/v1/users/1287065525716783137")
+        //     .then(response => response.json())
+        //         .then(({ data }) => {
+        //             discord_online_status.innerText = data.discord_status
+        //             const customActivity = data.activities.find(activity => activity.type === 4);
+        //             if (customActivity) {
+        //                 const emoji = customActivity.emoji ? customActivity.emoji.name+" " : '';
+        //                 const text = customActivity.state || '';
+        //                 discord_custom_status.innerText = emoji + text
+        //             } else {
+        //                 discord_custom_status.innerText = "not set"
+        //             }
+        //         });
     </script>
 
 </html>
